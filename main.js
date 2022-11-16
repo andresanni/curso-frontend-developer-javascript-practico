@@ -69,7 +69,7 @@ productsList.forEach((product)=>{
     <img src=${product.img} alt=${product.name}>
     <div class="product-info">
       <div>
-        <p>${product.price}</p>
+        <p>$${product.price}</p>
         <p>${product.name}</p>
       </div>
       <figure>
