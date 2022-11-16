@@ -65,19 +65,57 @@ productsList.push(
 // Function to add card for each product in document
 function renderProductsFromArray(array){
 productsList.forEach((product)=>{
-    cardsContainer.innerHTML +=`<div class="product-card">
-    <img src=${product.img} alt=${product.name}>
-    <div class="product-info">
-      <div>
-        <p>$${product.price}</p>
-        <p>${product.name}</p>
-      </div>
-      <figure>
-        <img src="./icons/bt_add_to_cart.svg" alt="">
-      </figure>
-    </div>
-  </div>`
+
+    const productCard = document.createElement('div');
+    productCard.classList.add("product-card");
+
+    const productImg = document.createElement('img');
+    productImg.setAttribute('src',product.img);
+
+    const productInfo = document.createElement('div');
+    productInfo.classList.add('product-info');
+
+    const productInfoDiv = document.createElement('div');
+
+    const productPrice = document.createElement('p');
+    productPrice.innerText="$" + product.price;
+    const productName = document.createElement('p');
+    productName.innerText = product.name;
+
+    const productInfoFigure = document.createElement('figure');
+    const productImgCart = document.createElement('img');
+    productImgCart.setAttribute('src',"./icons/bt_add_to_cart.svg");
+
+    productInfoDiv.appendChild(productPrice);
+    productInfoDiv.appendChild(productName);
+
+    productInfoFigure.appendChild(productImgCart);
+
+    productInfo.appendChild(productInfoDiv);
+    productInfo.appendChild(productInfoFigure);
+
+    productCard.appendChild(productImg);
+    productCard.appendChild(productInfo);
+    
+    cardsContainer.appendChild(productCard);
+   
+//     cardsContainer.innerHTML +=
+//     `<div class="product-card">
+//         <img src=${product.img}alt=${product.name}>
+//         <div class="product-info">
+//         <div>
+//              <p>$${product.price}</p>
+//             <p>${product.name}</p>
+//          </div>
+        
+//          <figure>
+//         <img src="./icons/bt_add_to_cart.svg" alt="">
+//       </figure>
+//         </div>
+//   </div>`;
+ 
 })
+
 }
 
 //Call the fuction with our hardcoded array
