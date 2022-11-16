@@ -5,11 +5,14 @@ const mobileMenu = document.querySelector(".mobile-menu");
 const menuCartIcon = document.querySelector(".navbar-shopping-cart");
 const asideProductDetail = document.querySelector(".product-detail");
 const cardsContainer = document.querySelector(".cards-container");
+const asideProdcutDetailSecondary = document.querySelector(".product-detail-secondary");
+const productDetailCloseIcon = document.querySelector(".product-detail-close");
 
 
 menuEmail.addEventListener("click",toggleDesktopMenu);
 mobileMenuIcon.addEventListener("click",toggleMobileMenu);
 menuCartIcon.addEventListener("click",toggleCartDetail);
+productDetailCloseIcon.addEventListener("click",closeProductDetailAside)
 
 function toggleDesktopMenu(){
     const isAsideProductDetailOpened = !asideProductDetail.classList.contains("inactive");
@@ -34,12 +37,32 @@ function toggleMobileMenu(){
 
 function toggleCartDetail(){
     const isMobileMenuOpen = !mobileMenu.classList.contains("inactive");
+    const isProductDetailAsideOpen = !asideProdcutDetailSecondary.classList.contains("inactive");
 
     if(isMobileMenuOpen){
     mobileMenu.classList.add("inactive");
-   }
-    
+   }    
    asideProductDetail.classList.toggle("inactive");
+
+   if(isProductDetailAsideOpen){
+    asideProdcutDetailSecondary.classList.add("inactive");
+   }
+}
+
+function openProductDetailAside(){
+
+    const isAsideSecondaryOpen= !asideProductDetail.classList.contains("inactive");
+
+    asideProdcutDetailSecondary.classList.remove('inactive');
+
+    if(isAsideSecondaryOpen)
+    {
+        asideProductDetail.classList.add("inactive");
+    }
+}
+
+function closeProductDetailAside(){
+    asideProdcutDetailSecondary.classList.add('inactive');
 }
 
 // Product List Hardcode
@@ -71,7 +94,7 @@ productsList.forEach((product)=>{
 
     const productImg = document.createElement('img');
     productImg.setAttribute('src',product.img);
-
+    productImg.addEventListener('click',openProductDetailAside)
     const productInfo = document.createElement('div');
     productInfo.classList.add('product-info');
 
@@ -120,3 +143,4 @@ productsList.forEach((product)=>{
 
 //Call the fuction with our hardcoded array
 renderProductsFromArray(productsList);
+
